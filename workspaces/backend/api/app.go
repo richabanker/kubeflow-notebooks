@@ -78,6 +78,9 @@ func (a *App) Routes() http.Handler {
 	// healthcheck
 	router.GET(constants.HealthCheckPath, a.GetHealthcheckHandler)
 
+	// user
+	router.GET(constants.UserPath, a.GetUserHandler)
+
 	// namespaces
 	router.GET(constants.AllNamespacesPath, a.GetNamespacesHandler)
 
