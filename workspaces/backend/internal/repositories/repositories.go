@@ -21,6 +21,7 @@ import (
 
 	"github.com/kubeflow/notebooks/workspaces/backend/internal/config"
 	"github.com/kubeflow/notebooks/workspaces/backend/internal/repositories/health_check"
+	"github.com/kubeflow/notebooks/workspaces/backend/internal/repositories/metrics"
 	"github.com/kubeflow/notebooks/workspaces/backend/internal/repositories/namespaces"
 	"github.com/kubeflow/notebooks/workspaces/backend/internal/repositories/pvcs"
 	"github.com/kubeflow/notebooks/workspaces/backend/internal/repositories/secrets"
@@ -32,6 +33,7 @@ import (
 // Repositories is a single convenient container to hold and represent all our repositories.
 type Repositories struct {
 	HealthCheck   *health_check.HealthCheckRepository
+	Metrics       *metrics.MetricsRepository
 	Namespace     *namespaces.NamespaceRepository
 	PVC           *pvcs.PVCRepository
 	Secret        *secrets.SecretRepository
@@ -49,6 +51,7 @@ func NewRepositories(
 ) *Repositories {
 	return &Repositories{
 		HealthCheck:   health_check.NewHealthCheckRepository(cfg),
+		Metrics:       metrics.NewMetricsRepository(cfg, cl),
 		Namespace:     namespaces.NewNamespaceRepository(cfg, cl),
 		PVC:           pvcs.NewPVCRepository(cfg, cl),
 		Secret:        secrets.NewSecretRepository(cfg, cl),
